@@ -1,18 +1,17 @@
 // NFTMarketplace.sol
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
+
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
 import "./INFT.sol";
 
 contract NFTMarketplace is ReentrancyGuard, Pausable, Ownable {
     INFT public nftContract;
-    using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
-    Counters.Counter private _itemsSold;
+    uint256 private _itemsSold;
+    uint256[] public marketTokenIds;
 
     uint256 public listingPrice = 0.025 ether;
     uint256 public transferFee = 2;
@@ -44,7 +43,7 @@ contract NFTMarketplace is ReentrancyGuard, Pausable, Ownable {
 
     mapping(uint256 => MarketItem) public idToMarketItem;
 
-    constructor(address nftAddress) {
+    constructor(address nftAddress) Ownable(msg.sender) {
         nftContract = INFT(nftAddress);
     }
 
@@ -98,7 +97,7 @@ contract NFTMarketplace is ReentrancyGuard, Pausable, Ownable {
                 batchSpecificId
             );
 
-            _tokenIds.increment();
+            marketTokenIds.push(tokenId);
 
             emit MarketItemCreated(tokenId, seller, price);
         }
@@ -125,7 +124,7 @@ contract NFTMarketplace is ReentrancyGuard, Pausable, Ownable {
         payable(item.creator).transfer(royaltyAmount);
 
         item.sold = true;
-        _itemsSold.increment();
+        _itemsSold += 1;
         nftContract.safeTransferFrom(address(this), msg.sender, tokenId);
 
         emit MarketItemSold(tokenId, msg.sender, item.price);
@@ -142,7 +141,6 @@ contract NFTMarketplace is ReentrancyGuard, Pausable, Ownable {
 
         // Correctly create a memory array of length 1
         uint256[] memory tokenIds = new uint256[](1);
-        tokenIds[0] = tokenId;
         tokenIds[0] = tokenId;
 
         createMarketItem(tokenIds, price, msg.sender);
@@ -161,67 +159,84 @@ contract NFTMarketplace is ReentrancyGuard, Pausable, Ownable {
 
     // Returns all unsold market items
     function fetchMarketItems() public view returns (MarketItem[] memory) {
-        uint256 totalItemCount = _tokenIds.current();
-        uint256 unsoldItemCount = totalItemCount - _itemsSold.current();
-        uint256 currentIndex = 0;
+        uint256 totalItemCount = marketTokenIds.length;
+        uint256 unsoldItemCount = 0;
+
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            if (!idToMarketItem[marketTokenIds[i]].sold) {
+                unsoldItemCount++;
+            }
+        }
 
         MarketItem[] memory items = new MarketItem[](unsoldItemCount);
-        for (uint256 i = 1; i <= totalItemCount; i++) {
-            if (!idToMarketItem[i].sold) {
-                items[currentIndex] = idToMarketItem[i];
+        uint256 currentIndex = 0;
+
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            uint256 tokenId = marketTokenIds[i];
+            if (!idToMarketItem[tokenId].sold) {
+                items[currentIndex] = idToMarketItem[tokenId];
                 currentIndex++;
             }
         }
+
         return items;
     }
 
     // Returns only items that the caller has purchased
     function fetchMyNFTs() public view returns (MarketItem[] memory) {
-        uint256 totalItemCount = _tokenIds.current();
+        uint256 totalItemCount = marketTokenIds.length;
         uint256 itemCount = 0;
-        uint256 currentIndex = 0;
 
-        for (uint256 i = 1; i <= totalItemCount; i++) {
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            uint256 tokenId = marketTokenIds[i];
             if (
-                idToMarketItem[i].sold &&
-                nftContract.ownerOf(idToMarketItem[i].tokenId) == msg.sender
+                idToMarketItem[tokenId].sold &&
+                nftContract.ownerOf(tokenId) == msg.sender
             ) {
                 itemCount++;
             }
         }
 
         MarketItem[] memory items = new MarketItem[](itemCount);
-        for (uint256 i = 1; i <= totalItemCount; i++) {
+        uint256 currentIndex = 0;
+
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            uint256 tokenId = marketTokenIds[i];
             if (
-                idToMarketItem[i].sold &&
-                nftContract.ownerOf(idToMarketItem[i].tokenId) == msg.sender
+                idToMarketItem[tokenId].sold &&
+                nftContract.ownerOf(tokenId) == msg.sender
             ) {
-                items[currentIndex] = idToMarketItem[i];
+                items[currentIndex] = idToMarketItem[tokenId];
                 currentIndex++;
             }
         }
+
         return items;
     }
 
     // Returns only items listed by the caller
     function fetchItemsListed() public view returns (MarketItem[] memory) {
-        uint256 totalItemCount = _tokenIds.current();
+        uint256 totalItemCount = marketTokenIds.length;
         uint256 itemCount = 0;
-        uint256 currentIndex = 0;
 
-        for (uint256 i = 1; i <= totalItemCount; i++) {
-            if (idToMarketItem[i].seller == msg.sender) {
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            uint256 tokenId = marketTokenIds[i];
+            if (idToMarketItem[tokenId].seller == msg.sender) {
                 itemCount++;
             }
         }
 
         MarketItem[] memory items = new MarketItem[](itemCount);
-        for (uint256 i = 1; i <= totalItemCount; i++) {
-            if (idToMarketItem[i].seller == msg.sender) {
-                items[currentIndex] = idToMarketItem[i];
+        uint256 currentIndex = 0;
+
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            uint256 tokenId = marketTokenIds[i];
+            if (idToMarketItem[tokenId].seller == msg.sender) {
+                items[currentIndex] = idToMarketItem[tokenId];
                 currentIndex++;
             }
         }
+
         return items;
     }
 

@@ -1,6 +1,6 @@
 // GSOEToken.sol
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -28,8 +28,8 @@ contract GSOEToken is ERC721URIStorage, AccessControl {
     );
 
     constructor() ERC721("Greatest Show On Earth", "GSOE") {
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _setupRole(MINTER_ROLE, msg.sender);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(MINTER_ROLE, msg.sender);
     }
 
     function mintBatch(
@@ -91,8 +91,10 @@ contract GSOEToken is ERC721URIStorage, AccessControl {
     }
 
     function exists(uint256 tokenId) external view returns (bool) {
-        return _exists(tokenId);
+        return _ownerOf(tokenId) != address(0);
     }
+
+    // require(_ownerOf(tokenId) != address(0), "Token does not exist");
 
     function supportsInterface(
         bytes4 interfaceId
