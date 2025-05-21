@@ -1,0 +1,19 @@
+{
+  "name": "hardhat_provider",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "hardhat": "^2.14.0",
+    "hardhat-contract-sizer": "^2.10.0"
+  }
+}
