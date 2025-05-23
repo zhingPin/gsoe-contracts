@@ -96,17 +96,20 @@ describe("Lock", function () {
 
     describe("Events", function () {
       it("Should emit an event on withdrawals", async function () {
-        const { lock, unlockTime, lockedAmount } = await loadFixture(
-          deployOneYearLockFixture
-        );
+        const { lock, unlockTime, lockedAmount, owner } = await loadFixture(deployOneYearLockFixture);
 
         await time.increaseTo(unlockTime);
 
-        await expect(lock.withdraw())
+        // Capture the transaction when calling withdraw()
+        const tx = await lock.withdraw();
+
+        // Now check the event was emitted with the right args
+        await expect(tx)
           .to.emit(lock, "Withdrawal")
-          .withArgs(lockedAmount, anyValue); // We accept any value as `when` arg
+          .withArgs(owner.address, lockedAmount);
       });
     });
+
 
     describe("Transfers", function () {
       it("Should transfer the funds to the owner", async function () {

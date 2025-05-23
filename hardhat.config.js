@@ -1,4 +1,6 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-chai-matchers");
+
 // require("@nomicfoundation/hardhat-verify");
 // require("dotenv").config();
 

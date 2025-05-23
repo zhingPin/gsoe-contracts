@@ -1,6 +1,10 @@
 const hre = require("hardhat");
 
 async function deployContracts() {
+  const [deployer] = await hre.ethers.getSigners();
+  console.log(`Deploying contracts with account: ${deployer.address}`);
+
+
   // 1. Deploy GSOEToken (ERC721)
   const GSOEToken = await hre.ethers.getContractFactory("GSOEToken");
   const gsoeToken = await GSOEToken.deploy();
@@ -20,6 +24,7 @@ async function deployContracts() {
   console.log(`Granted MINTER_ROLE to NFTMarketplace`);
 
 }
+
 
 deployContracts()
   .then(() => process.exit(0))
