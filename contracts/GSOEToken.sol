@@ -2,10 +2,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-
-import "@openzeppelin/contracts/access/AccessControl.sol";
+import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 
 contract GSOEToken is ERC721URIStorage, AccessControl {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
@@ -92,8 +91,6 @@ contract GSOEToken is ERC721URIStorage, AccessControl {
     function exists(uint256 tokenId) external view returns (bool) {
         return _ownerOf(tokenId) != address(0);
     }
-
-    // require(_ownerOf(tokenId) != address(0), "Token does not exist");
 
     function supportsInterface(
         bytes4 interfaceId

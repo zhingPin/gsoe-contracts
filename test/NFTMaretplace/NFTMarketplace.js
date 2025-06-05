@@ -61,6 +61,53 @@ describe("NFTMarketplace", function () {
         expect(updated.owner).to.equal(buyer.address);
     });
 
+    it("should return NFTs owned by buyer in fetchMyNFTs", async () => {
+        const uri = "ipfs://mocked-uri";
+        const price = ethers.utils.parseEther("1");
+        const royalty = 5;
+
+        // Seller mints and lists
+        await marketplace.connect(seller).mintAndList(uri, price, royalty, 1, {
+            value: ethers.utils.parseEther("0.025"),
+        });
+
+        const items = await marketplace.fetchMarketItems();
+        const listingId = items[0].listingId;
+
+        // Buyer buys the NFT
+        await marketplace.connect(buyer).buyItem(listingId, { value: price });
+
+        // Fetch NFTs owned by buyer
+        const buyerNFTs = await marketplace.connect(buyer).fetchMyNFTs();
+
+        expect(buyerNFTs.length).to.equal(1);
+        expect(buyerNFTs[0].owner).to.equal(buyer.address);
+        expect(buyerNFTs[0].listingId).to.equal(listingId);
+    });
+
+    it("should return NFTs listed by seller in fetchItemsListed", async () => {
+        const uri = "ipfs://mocked-uri";
+        const price = ethers.utils.parseEther("1");
+        const royalty = 5;
+
+        // Seller mints and lists two NFTs
+        await marketplace.connect(seller).mintAndList(uri, price, royalty, 1, {
+            value: ethers.utils.parseEther("0.025"),
+        });
+        await marketplace.connect(seller).mintAndList(uri, price, royalty, 1, {
+            value: ethers.utils.parseEther("0.025"),
+        });
+
+        // Fetch NFTs listed by seller
+        const listedNFTs = await marketplace.connect(seller).fetchItemsListed();
+
+        expect(listedNFTs.length).to.equal(2);
+        listedNFTs.forEach((nft) => {
+            expect(nft.seller).to.equal(seller.address);
+        });
+    });
+
+
     it("should allow delisting of unsold items", async () => {
         const uri = "ipfs://mocked-uri";
         const price = ethers.utils.parseEther("1");

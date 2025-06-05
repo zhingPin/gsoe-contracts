@@ -48,6 +48,8 @@ contract NFTMarketplace is ReentrancyGuard, Pausable, Ownable, IERC721Receiver {
         address indexed seller
     );
 
+    event Withdraw(address indexed user, uint256 amount);
+
     mapping(uint256 => MarketItem) public idToMarketItem;
     mapping(uint256 => uint256[]) public tokenIdToListings;
     mapping(address => uint256) public pendingWithdrawals;
@@ -260,6 +262,10 @@ contract NFTMarketplace is ReentrancyGuard, Pausable, Ownable, IERC721Receiver {
         return (listingPrice, transferFee);
     }
 
+    function getNftOwner(uint256 tokenId) public view returns (address) {
+        return nftContract.ownerOf(tokenId);
+    }
+
     function updateFees(
         uint256 _listingPrice,
         uint256 _transferFee
@@ -280,5 +286,7 @@ contract NFTMarketplace is ReentrancyGuard, Pausable, Ownable, IERC721Receiver {
 
         (bool success, ) = msg.sender.call{value: amount}("");
         require(success, "Withdraw failed");
+
+        emit Withdraw(msg.sender, amount);
     }
 }
