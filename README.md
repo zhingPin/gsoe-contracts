@@ -66,9 +66,12 @@ POLYGONSCAN_API_KEY=your_polygonscan_api_key (optional)
 🔐 Security Note: Never commit .env to version control.
 
 ## ⚙️ Hardhat Configuration
- Supports the following networks:
->hardhat – Local development chain
->polygon_amoy – Polygon Amoy testnet (RPC Info)
+
+Supports the following networks:
+
+- `hardhat` – Local development chain
+- `polygon_amoy` – Polygon Amoy testnet (RPC defined in `.env`)
+
 
 🧪 Development & Deployment
 > Compile, Test & Analyze
