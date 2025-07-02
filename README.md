@@ -64,6 +64,7 @@ TEST_PRIVATE_KEY=your_testnet_private_key_without_0x
 LIVE_PRIVATE_KEY=your_mainnet_private_key_without_0x
 POLYGON_AMOY_RPC=https://rpc-amoy.polygon.technology
 POLYGONSCAN_API_KEY=your_polygonscan_api_key (optional)
+```
 
 🔐 Security Note: Never commit .env to version control.
 
