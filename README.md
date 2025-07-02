@@ -29,7 +29,7 @@ A next-generation NFT marketplace empowering artists, performers, and creators w
 > Read-only contract that efficiently aggregates marketplace state, listings, and earnings for frontend use.
 
 # 📁 Project Structure
-```
+``
 web3/
 ├── contracts/
 │   ├── GSOEToken.sol              # ERC721 token with roles
@@ -53,7 +53,7 @@ web3/
 ├── hardhat.config.js              # Hardhat configuration
 ├── .env                           # Environment variables (excluded via .gitignore)
 └── README.md                      # This file
-```
+``
 
 ## 🌐 Environment Setup
 
@@ -65,7 +65,6 @@ LIVE_PRIVATE_KEY=your_mainnet_private_key_without_0x
 POLYGON_AMOY_RPC=https://rpc-amoy.polygon.technology
 POLYGONSCAN_API_KEY=your_polygonscan_api_key (optional)
 ```
-
 🔐 Security Note: Never commit .env to version control.
 
 ## ⚙️ Hardhat Configuration
