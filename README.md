@@ -29,7 +29,7 @@ A next-generation NFT marketplace empowering artists, performers, and creators w
 > Read-only contract that efficiently aggregates marketplace state, listings, and earnings for frontend use.
 
 # 📁 Project Structure
-```Edit
+```bash
 web3/
 ├── contracts/
 │   ├── GSOEToken.sol              # ERC721 token with roles
