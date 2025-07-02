@@ -88,4 +88,4 @@ Supports the following networks:
 - `npx hardhat run scripts/deploy.js --network polygon_amoy`
 
 > Auditing
-- `slither .`
+- `slither .`     #Self auditing
