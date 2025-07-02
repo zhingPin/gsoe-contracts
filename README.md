@@ -55,7 +55,7 @@ web3/
 └── README.md                      # This file
 
 ```
-## 🌐 Environment Setup
+# 🌐 Environment Setup
 
 Create a `.env` file in the project root with the following:
 
@@ -82,8 +82,6 @@ Supports the following networks:
 - `npx hardhat test`              - Run contract unit tests
 - `npx hardhat coverage`         - Generate coverage report
 - `npx hardhat size-contracts`    - Show contract size summary
-
-
 > Deploy to Polygon Amoy
 - `npx hardhat run scripts/deploy.js --network polygon_amoy`
 
