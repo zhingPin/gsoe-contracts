@@ -1,4 +1,4 @@
-🎪 Greatest Show On Earth (GSOE)
+# 🎪 Greatest Show On Earth (GSOE)
 A next-generation NFT marketplace empowering artists, performers, and creators with fair revenue-sharing, multi-recipient royalties, and decentralized management — deployable on any EVM-compatible blockchain.
 
 🚀 Features
@@ -14,7 +14,7 @@ A next-generation NFT marketplace empowering artists, performers, and creators w
 
 ⛓️ EVM Compatible – Deployable to Ethereum, Polygon, Arbitrum, Optimism, Base, and more
 
-🏗️ Smart Contract Architecture
+# 🏗️ Smart Contract Architecture
 > 🔹 GSOEToken.sol
 ERC721-compliant NFT contract with AccessControl. Grants MINTER_ROLE to the marketplace for trusted minting.
 
@@ -27,7 +27,7 @@ User-facing contract that handles NFT minting and listing in a single transactio
 > 🔹 MarketplaceView.sol
 Read-only contract that efficiently aggregates marketplace state, listings, and earnings for frontend use.
 
-📁 Project Structure
+# 📁 Project Structure
 
 web3/
 ├── contracts/
@@ -54,13 +54,13 @@ web3/
 └── README.md                      # This file
 
 
-🌐 Environment Setup
+# 🌐 Environment Setup
 
 > Create a .env file in the project root:
 TEST_PRIVATE_KEY=your_testnet_private_key_without_0x
 LIVE_PRIVATE_KEY=your_mainnet_private_key_without_0x
 POLYGON_AMOY_RPC=https://rpc-amoy.polygon.technology
-# POLYGONSCAN_API_KEY=your_polygonscan_api_key (optional)
+POLYGONSCAN_API_KEY=your_polygonscan_api_key (optional)
 🔐 Security Note: Never commit .env to version control.
 
 ⚙️ Hardhat Configuration
