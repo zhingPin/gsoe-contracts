@@ -77,15 +77,15 @@ Supports the following networks:
 
 ## 🧪 Development & Deployment
 > Compile, Test & Analyze
-- `npx hardhat clean`            #Clean contract artifacts
-- `npx hardhat compile`          # Compile contracts
-- `npx hardhat test`              # Run contract unit tests
-- `npx hardhat coverage`         # Generate coverage report
-- `npx hardhat size-contracts`    # Show contract size summary
+- `npx hardhat clean`            - Clean contract artifacts
+- `npx hardhat compile`          - Compile contracts
+- `npx hardhat test`              - Run contract unit tests
+- `npx hardhat coverage`         - Generate coverage report
+- `npx hardhat size-contracts`    - Show contract size summary
 
 
 > Deploy to Polygon Amoy
 - `npx hardhat run scripts/deploy.js --network polygon_amoy`
 
 > Auditing
-- `slither .`     #Self auditing
+- `slither .`     -Self auditing
