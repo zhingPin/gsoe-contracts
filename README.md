@@ -55,14 +55,16 @@ web3/
 └── README.md                      # This file
 
 
-# 🌐 Environment Setup
+## 🌐 Environment Setup
 
-## Create a .env file in the project root:
+Create a `.env` file in the project root with the following:
 
+```env
 TEST_PRIVATE_KEY=your_testnet_private_key_without_0x
 LIVE_PRIVATE_KEY=your_mainnet_private_key_without_0x
 POLYGON_AMOY_RPC=https://rpc-amoy.polygon.technology
 POLYGONSCAN_API_KEY=your_polygonscan_api_key (optional)
+
 🔐 Security Note: Never commit .env to version control.
 
 ## ⚙️ Hardhat Configuration
@@ -73,12 +75,12 @@ Supports the following networks:
 - `polygon_amoy` – Polygon Amoy testnet (RPC defined in `.env`)
 
 
-🧪 Development & Deployment
+## 🧪 Development & Deployment
 > Compile, Test & Analyze
-npx hardhat compile           # Compile contracts
-npx hardhat test              # Run contract unit tests
-npx hardhat coverage          # Generate coverage report
-npx hardhat size-contracts    # Show contract size summary
+- `npx hardhat compile `          # Compile contracts
+- npx hardhat test              # Run contract unit tests
+- npx hardhat coverage          # Generate coverage report
+- npx hardhat size-contracts    # Show contract size summary
 
 
 > Deploy to Polygon Amoy
