@@ -75,7 +75,7 @@ Supports the following networks:
 - `polygon_amoy` – Polygon Amoy testnet (RPC defined in `.env`)
 
 
-## 🧪 Development & Deployment
+# 🧪 Development & Deployment
 > Compile, Test & Analyze
 - `npx hardhat clean`            - Clean contract artifacts
 - `npx hardhat compile`          - Compile contracts
