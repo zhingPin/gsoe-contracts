@@ -82,6 +82,11 @@ Supports the following networks:
 - `npx hardhat test`              - Run contract unit tests
 - `npx hardhat coverage`         - Generate coverage report
 - `npx hardhat size-contracts`    - Show contract size summary
+
+> Deploy to Hardhat
+- `npx hardhat node`            - Local Hardhat node
+- `npx hardhat run scripts/deploy.js --network hardhat`
+
 > Deploy to Polygon Amoy
 - `npx hardhat run scripts/deploy.js --network polygon_amoy`
 
