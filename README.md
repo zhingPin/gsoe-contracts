@@ -78,12 +78,12 @@ Supports the following networks:
 
 ## 🧪 Development & Deployment
 > Compile, Test & Analyze
-- `npx hardhat compile `          # Compile contracts
-- npx hardhat test              # Run contract unit tests
-- npx hardhat coverage          # Generate coverage report
-- npx hardhat size-contracts    # Show contract size summary
+- `npx hardhat compile`          # Compile contracts
+- `npx hardhat test`              # Run contract unit tests
+- `npx hardhat coverage`         # Generate coverage report
+- `npx hardhat size-contracts`    # Show contract size summary
 
 
 > Deploy to Polygon Amoy
-npx hardhat run scripts/deploy.js --network polygon_amoy
+- `npx hardhat run scripts/deploy.js --network polygon_amoy`
 
