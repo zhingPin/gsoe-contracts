@@ -1,5 +1,5 @@
 # 🎪 Greatest Show On Earth (GSOE)
-A next-generation NFT marketplace empowering artists, performers, and creators with fair revenue-sharing, multi-recipient royalties, and decentralized management — currently deployable on any - `EVM-compatible` blockchain.
+A next-generation NFT marketplace empowering artists, performers, and creators with fair revenue-sharing, multi-recipient royalties, and decentralized management — currently deployable on any `EVM-compatible` blockchain.
 
 🚀 Features
 🎭 Batch Minting – Mint multiple NFTs in organized batches
