@@ -1,5 +1,5 @@
 # 🎪 Greatest Show On Earth (GSOE)
-A next-generation NFT marketplace empowering artists, performers, and creators with fair revenue-sharing, multi-recipient royalties, and decentralized management — deployable on any EVM-compatible blockchain.
+A next-generation NFT marketplace empowering artists, performers, and creators with fair revenue-sharing, multi-recipient royalties, and decentralized management — currently deployable on any - `EVM-compatible` blockchain.
 
 🚀 Features
 🎭 Batch Minting – Mint multiple NFTs in organized batches
@@ -77,6 +77,7 @@ Supports the following networks:
 
 ## 🧪 Development & Deployment
 > Compile, Test & Analyze
+- `npx hardhat clean`            #Clean contract artifacts
 - `npx hardhat compile`          # Compile contracts
 - `npx hardhat test`              # Run contract unit tests
 - `npx hardhat coverage`         # Generate coverage report
@@ -86,3 +87,5 @@ Supports the following networks:
 > Deploy to Polygon Amoy
 - `npx hardhat run scripts/deploy.js --network polygon_amoy`
 
+> Auditing
+- `slither .`
