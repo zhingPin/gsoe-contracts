@@ -15,17 +15,18 @@ A next-generation NFT marketplace empowering artists, performers, and creators w
 ⛓️ EVM Compatible – Deployable to Ethereum, Polygon, Arbitrum, Optimism, Base, and more
 
 # 🏗️ Smart Contract Architecture
-> 🔹 GSOEToken.sol
-ERC721-compliant NFT contract with AccessControl. Grants MINTER_ROLE to the marketplace for trusted minting.
 
-> 🔹 MarketplaceCore.sol
-Handles core marketplace logic: listing, delisting, purchasing, royalty calculations, and revenue tracking.
+🔹 GSOEToken.sol
+> ERC721-compliant NFT contract with AccessControl. Grants MINTER_ROLE to the marketplace for trusted minting.
 
-> 🔹 NFTMarketMinter.sol
-User-facing contract that handles NFT minting and listing in a single transaction.
+🔹 MarketplaceCore.sol
+> Handles core marketplace logic: listing, delisting, purchasing, royalty calculations, and revenue tracking.
 
-> 🔹 MarketplaceView.sol
-Read-only contract that efficiently aggregates marketplace state, listings, and earnings for frontend use.
+🔹 NFTMarketMinter.sol
+> User-facing contract that handles NFT minting and listing in a single transaction.
+
+🔹 MarketplaceView.sol
+> Read-only contract that efficiently aggregates marketplace state, listings, and earnings for frontend use.
 
 # 📁 Project Structure
 
