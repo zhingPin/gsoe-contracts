@@ -1,33 +1,37 @@
 require("@nomicfoundation/hardhat-toolbox");
-require("@nomicfoundation/hardhat-chai-matchers");
+require("solidity-coverage");
 
-// require("@nomicfoundation/hardhat-verify");
-// require("dotenv").config();
+require("dotenv").config();
 
-// const { NEXT_PUBLIC_POLYGON_MUMBAI_RPC, NEXT_PUBLIC_PRIVATE_KEY } = process.env;
+const { TEST_PRIVATE_KEY, LIVE_PRIVATE_KEY, POLYGON_AMOY_RPC } = process.env;
 
 /** @type import('hardhat/config').HardhatUserConfig */
-
 module.exports = {
-  solidity: "0.8.20",
-  // defaultNetwork: "polygon_mumbai",
-  networks: {
-    hardhat: {},
-
-    //   polygon_mumbai: {
-    //     url: NEXT_PUBLIC_POLYGON_MUMBAI_RPC,
-    // accounts: [`0x${NEXT_PUBLIC_PRIVATE_KEY}`],
-    // },
+  defaultNetwork: "hardhat",
+  solidity: {
+    version: "0.8.20",
+    settings: {
+      optimizer: {
+        enabled: true, runs: 200
+      }
+    }
   },
+  networks: {
+    hardhat: {
+      chainId: 80001
+    },
+    polygon_amoy: {
+      url: POLYGON_AMOY_RPC,
+      accounts: [`0x${TEST_PRIVATE_KEY}`],
+    },
+
+  },
+  // etherscan: {
+  //   apiKey: {
+  //     polygonAmoy: POLYGONSCAN_API_KEY || "",
+  //   },
+  // },
   contractSizer: {
     runOnCompile: true,
   },
-
-  //   // fuji: {
-  //   //   url: `Your URL`,
-  //   //   accounts: [
-  //   //     `0x${"Your Account"}`,
-  //   //   ],
-  //   // },
-  // },
 };

@@ -85,7 +85,7 @@ contract NFTMarketplace is ReentrancyGuard, Pausable, Ownable, IERC721Receiver {
         );
 
         uint256[] memory newTokenIds = nftContract.mintBatch(
-            address(this),
+            msg.sender, // ← This is the creator
             tokenURI,
             quantity,
             royaltyPercentage
